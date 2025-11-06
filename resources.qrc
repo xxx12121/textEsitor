@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/">
+        <file>img/3状态栏.png</file>
+        <file>img/文本编辑器.png</file>
+        <file>img/显示行号.png</file>
+        <file>img/自动换行.png</file>
+        <file>img/字体.png</file>
+        <file>text/test.txt</file>
+    </qresource>
+</RCC>
