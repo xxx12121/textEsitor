@@ -6,6 +6,8 @@ AboutDialog::AboutDialog(QWidget *parent)
     , ui(new Ui::AboutDialog)
 {
     ui->setupUi(this);
+    this->setWindowTitle("关于");
+    this->setWindowIcon(QIcon::fromTheme("help-about"));
 }
 
 AboutDialog::~AboutDialog()

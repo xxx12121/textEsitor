@@ -2,6 +2,7 @@
 #define FINDDIALOG_H
 
 #include <QDialog>
+#include <QPlainTextEdit>
 
 namespace Ui {
 class FindDialog;
@@ -15,8 +16,17 @@ public:
     explicit FindDialog(QWidget *parent = nullptr);
     ~FindDialog();
 
+    void find(QPlainTextEdit* editor);
+
+private slots:
+    void on_btnNext_clicked();
+
+    void on_btnCancel_clicked();
+
 private:
     Ui::FindDialog *ui;
+
+    QPlainTextEdit *editor;
 };
 
 #endif // FINDDIALOG_H

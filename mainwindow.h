@@ -2,7 +2,10 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QCloseEvent>
 #include "aboutdialog.h"
+#include "finddialog.h"
+#include "replacedialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -19,6 +22,8 @@ public:
     ~MainWindow();
 
 private slots:
+    void closeEvent(QCloseEvent *event);
+
     void on_action_About_triggered();
 
     void on_action_N_triggered();
@@ -41,9 +46,15 @@ private slots:
 
     void on_action_P_triggered();
 
+    void on_action_F_triggered();
+
+    void on_action_R_triggered();
+
 private:
     Ui::MainWindow *ui;
     AboutDialog aboutDialog;
+    FindDialog findDialog;
+    ReplaceDialog replaceDialog;
 
     QString filename;
     QString raw;

@@ -27,6 +27,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
 
         aboutdialog.h aboutdialog.cpp aboutdialog.ui
         finddialog.h finddialog.cpp finddialog.ui
+        replacedialog.h replacedialog.cpp replacedialog.ui
 
     )
 # Define target properties for Android with Qt 6 as:

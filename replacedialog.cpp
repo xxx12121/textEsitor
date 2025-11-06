@@ -1,27 +1,25 @@
-#include "finddialog.h"
-#include "ui_finddialog.h"
-#include <QDebug>
+#include "replacedialog.h"
+#include "ui_replacedialog.h"
 
-FindDialog::FindDialog(QWidget *parent)
+ReplaceDialog::ReplaceDialog(QWidget *parent)
     : QDialog(parent)
-    , ui(new Ui::FindDialog)
+    , ui(new Ui::ReplaceDialog)
 {
     ui->setupUi(this);
     ui->radioDown->setChecked(true);
-    this->setWindowTitle("查找");
-    this->setWindowIcon(QIcon::fromTheme("edit-find"));
+    this->setWindowTitle("替换");
+    this->setWindowIcon(QIcon::fromTheme("accessories-character-map"));
 }
 
-FindDialog::~FindDialog()
+ReplaceDialog::~ReplaceDialog()
 {
     delete ui;
 }
 
-void FindDialog::find(QPlainTextEdit* editor){
-    this->editor=editor;
+void ReplaceDialog::replace(QPlainTextEdit *editor){
+    this->editor = editor;
 }
-
-void FindDialog::on_btnNext_clicked()
+void ReplaceDialog::on_btnNext_clicked()
 {
     QString text = editor->toPlainText();
     QString target = ui->target->displayText();
@@ -56,7 +54,24 @@ void FindDialog::on_btnNext_clicked()
 }
 
 
-void FindDialog::on_btnCancel_clicked()
+void ReplaceDialog::on_btnReplace_clicked()
+{
+    if(editor->textCursor().hasSelection()){
+        editor->insertPlainText(ui->replaceTo->displayText());
+    }
+}
+
+
+void ReplaceDialog::on_btnAll_clicked()
+{
+    Qt::CaseSensitivity cs = ui->checkBoxCaseSensitive->isChecked()?Qt::CaseSensitive:Qt::CaseInsensitive;
+    QString text = editor->toPlainText();
+    text.replace(ui->target->displayText(),ui->replaceTo->displayText(),cs);
+    editor->setPlainText(text);
+}
+
+
+void ReplaceDialog::on_btnCancel_clicked()
 {
     this->close();
 }

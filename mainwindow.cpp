@@ -11,6 +11,8 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
+    , aboutDialog()
+    , findDialog()
 {
     filename = "";
     raw = "";
@@ -29,6 +31,19 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+
+void MainWindow::closeEvent(QCloseEvent *event) {
+    if(raw != ui->plainTextEdit->toPlainText()){
+        QMessageBox::StandardButton reply = QMessageBox::question(this,tr("未保存"),tr("是否要保存当前内容？"), QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel);
+        if (reply == QMessageBox::Yes) {
+            ui->action_S->trigger();
+        } else if(reply == QMessageBox::Cancel){
+            event->ignore();
+        }
+    }
+}
+
 
 void MainWindow::on_action_About_triggered()
 {
@@ -101,7 +116,8 @@ void MainWindow::on_action_S_triggered()
         return;
     }
     QTextStream out(&file);
-    out<<ui->plainTextEdit->toPlainText();
+    raw = ui->plainTextEdit->toPlainText();
+    out<<raw;
     QMessageBox::information(this,"提示","保存成功");
     file.close();
 }
@@ -154,5 +170,19 @@ void MainWindow::on_action_C_triggered()
 void MainWindow::on_action_P_triggered()
 {
     ui->plainTextEdit->paste();
+}
+
+
+void MainWindow::on_action_F_triggered()
+{
+    findDialog.show();
+    findDialog.find(ui->plainTextEdit);
+}
+
+
+void MainWindow::on_action_R_triggered()
+{
+    replaceDialog.show();
+    replaceDialog.replace(ui->plainTextEdit);
 }
 
