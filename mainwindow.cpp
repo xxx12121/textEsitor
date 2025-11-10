@@ -25,6 +25,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->action_Tool->setChecked(true);
     ui->action_Statu->setChecked(true);
+    ui->action_W->setChecked(true);
+    ui->action_L->setChecked(false);
 
     ui->statusbar->show();
 
@@ -259,5 +261,17 @@ void MainWindow::on_action_EditorBackgroundColor_triggered()
     if(color.isValid()){
         ui->plainTextEdit->setStyleSheet(QString("QPlainTextEdit {background-color:%1;}").arg(color.name()));
     }
+}
+
+
+void MainWindow::on_action_L_triggered()
+{
+
+}
+
+
+void MainWindow::on_action_W_triggered()
+{
+    ui->plainTextEdit->setLineWrapMode(ui->action_W->isChecked()?QPlainTextEdit::WidgetWidth:QPlainTextEdit::NoWrap);
 }
 
