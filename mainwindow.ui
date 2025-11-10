@@ -71,7 +71,7 @@
     <property name="title">
      <string>查看(&amp;V)</string>
     </property>
-    <addaction name="action_T_2"/>
+    <addaction name="action_Tool"/>
     <addaction name="action_Statu"/>
    </widget>
    <widget class="QMenu" name="menu_H">
@@ -115,7 +115,7 @@
    <addaction name="action_L"/>
    <addaction name="action_W"/>
    <addaction name="separator"/>
-   <addaction name="action_T_2"/>
+   <addaction name="action_Tool"/>
    <addaction name="action_Statu"/>
   </widget>
   <action name="action_N">
@@ -355,7 +355,7 @@
     <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
-  <action name="action_T_2">
+  <action name="action_Tool">
    <property name="icon">
     <iconset theme="QIcon::ThemeIcon::DocumentProperties"/>
    </property>

@@ -50,6 +50,13 @@ private slots:
 
     void on_action_R_triggered();
 
+
+    void on_action_Tool_triggered();
+
+    void on_action_Statu_triggered();
+
+    void on_action_All_triggered();
+
 private:
     Ui::MainWindow *ui;
     AboutDialog aboutDialog;
@@ -58,6 +65,8 @@ private:
 
     QString filename;
     QString raw;
+
+    void setEditable(bool f);
 
 };
 #endif // MAINWINDOW_H

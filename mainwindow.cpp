@@ -18,10 +18,15 @@ MainWindow::MainWindow(QWidget *parent)
     raw = "";
 
     ui->setupUi(this);
-    ui->plainTextEdit->setEnabled(false);
 
-    ui->action_S->setEnabled(false);
-    ui->action_A->setEnabled(false);
+    setEditable(false);
+
+    ui->action_Tool->setCheckable(true);
+    ui->action_Tool->setChecked(true);
+    ui->action_Statu->setCheckable(true);
+    ui->action_Statu->setChecked(true);
+
+    ui->statusbar->show();
 
     this->setWindowTitle("文本编辑器");
 
@@ -44,6 +49,18 @@ void MainWindow::closeEvent(QCloseEvent *event) {
     }
 }
 
+void MainWindow::setEditable(bool f){
+    ui->plainTextEdit->setEnabled(f);
+    ui->action_S->setEnabled(f);
+    ui->action_A->setEnabled(f);
+    ui->action_C->setEnabled(f);
+    ui->action_T->setEnabled(f);
+    ui->action_P->setEnabled(f);
+    ui->action_U->setEnabled(f);
+    ui->action_Z->setEnabled(f);
+    ui->action_F->setEnabled(f);
+    ui->action_R->setEnabled(f);
+}
 
 void MainWindow::on_action_About_triggered()
 {
@@ -62,10 +79,8 @@ void MainWindow::on_action_N_triggered()
         }
     }
     raw = "";
-    ui->plainTextEdit->setEnabled(true);
+    setEnabled(true);
     ui->plainTextEdit->clear();
-    ui->action_S->setEnabled(true);
-    ui->action_A->setEnabled(true);
     this->setWindowTitle("未命名.txt");
     filename.clear();
 }
@@ -93,9 +108,8 @@ void MainWindow::on_action_O_triggered()
     }
 
     this->setWindowTitle(QFileInfo(filename).fileName());
-    ui->plainTextEdit->setEnabled(true);
-    ui->action_S->setEnabled(true);
-    ui->action_A->setEnabled(true);
+
+    setEditable(true);
 
     QTextStream in(&file);
     raw = in.readAll();
@@ -184,5 +198,24 @@ void MainWindow::on_action_R_triggered()
 {
     replaceDialog.show();
     replaceDialog.replace(ui->plainTextEdit);
+}
+
+
+
+void MainWindow::on_action_Tool_triggered()
+{
+    ui->toolBar->setHidden(!ui->action_Tool->isChecked());
+}
+
+
+void MainWindow::on_action_Statu_triggered()
+{
+    ui->statusbar->setHidden(!ui->action_Statu->isChecked());
+}
+
+
+void MainWindow::on_action_All_triggered()
+{
+    ui->plainTextEdit->selectAll();
 }
 
