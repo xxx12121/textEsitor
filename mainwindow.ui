@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>563</width>
-    <height>324</height>
+    <width>738</width>
+    <height>466</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -25,7 +25,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>563</width>
+     <width>738</width>
      <height>18</height>
     </rect>
    </property>
@@ -90,6 +90,65 @@
   <widget class="QToolBar" name="toolBar">
    <property name="windowTitle">
     <string>toolBar</string>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">/* 工具栏整体样式 */
+QToolBar {
+    background-color: #f0f0f0; /* 工具栏背景色 */
+    border: 1px solid #d0d0d0; /* 边框 */
+    border-radius: 4px; /* 圆角 */
+    padding: 1px; /* 内边距 */
+    spacing: 1px; /* 按钮间距 */
+}
+
+/* 工具栏按钮基础样式 */
+QToolBar QToolButton {
+    background-color: transparent; /* 透明背景 */
+    border: 1px solid transparent; /* 透明边框 */
+    border-radius: 3px; /* 圆角 */
+    padding: 4px 6px; /* 内边距 */
+    color: #333333; /* 文字颜色 */
+}
+
+/* 按钮悬停状态 */
+QToolBar QToolButton:hover {
+    background-color: #e0e0e0; /* 悬停背景色 */
+    border-color: #c0c0c0; /* 悬停边框色 */
+}
+
+/* 按钮按下状态 */
+QToolBar QToolButton:pressed {
+    background-color: #d0d0d0; /* 按下背景色 */
+    border-color: #b0b0b0; /* 按下边框色 */
+}
+
+/* 按钮选中状态（如切换按钮） */
+QToolBar QToolButton:checked {
+    background-color: #d5e8ff; /* 选中背景色 */
+    border-color: #99c4ff; /* 选中边框色 */
+}
+
+/* 禁用状态按钮 */
+QToolBar QToolButton:disabled {
+    color: #aaaaaa; /* 禁用文字色 */
+}
+
+/* 工具栏分隔线 */
+QToolBar QFrame[frameShape=&quot;QFrame::VLine&quot;] {
+    background-color: #d0d0d0; /* 分隔线颜色 */
+    width: 1px; /* 分隔线宽度 */
+    margin: 4px 2px; /* 分隔线边距 */
+}
+
+/* 带菜单的按钮指示器 */
+QToolBar QToolButton::menu-indicator {
+    image: url(:/icons/menu_indicator.png); /* 自定义指示器图标 */
+    subcontrol-position: right center; /* 位置 */
+    subcontrol-origin: padding; /* 原点 */
+    width: 8px; /* 宽度 */
+    height: 8px; /* 高度 */
+    right: 2px; /* 右边距 */
+}</string>
    </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
@@ -292,6 +351,9 @@
    </property>
   </action>
   <action name="action_W">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="icon">
     <iconset resource="resources.qrc">
      <normaloff>:/img/自动换行.png</normaloff>:/img/自动换行.png</iconset>
@@ -304,6 +366,9 @@
    </property>
   </action>
   <action name="action_L">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="icon">
     <iconset resource="resources.qrc">
      <normaloff>:/img/显示行号.png</normaloff>
@@ -356,6 +421,9 @@
    </property>
   </action>
   <action name="action_Tool">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="icon">
     <iconset theme="QIcon::ThemeIcon::DocumentProperties"/>
    </property>
@@ -367,6 +435,9 @@
    </property>
   </action>
   <action name="action_Statu">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="icon">
     <iconset resource="resources.qrc">
      <normaloff>:/img/3状态栏.png</normaloff>:/img/3状态栏.png</iconset>

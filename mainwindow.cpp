@@ -2,6 +2,8 @@
 #include "./ui_mainwindow.h"
 #include <QInputDialog>
 #include <QFileDialog>
+#include <QColorDialog>
+#include <QFontDialog>
 #include <QDebug>
 #include <QFile>
 #include <QFileInfo>
@@ -21,9 +23,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     setEditable(false);
 
-    ui->action_Tool->setCheckable(true);
     ui->action_Tool->setChecked(true);
-    ui->action_Statu->setCheckable(true);
     ui->action_Statu->setChecked(true);
 
     ui->statusbar->show();
@@ -217,5 +217,47 @@ void MainWindow::on_action_Statu_triggered()
 void MainWindow::on_action_All_triggered()
 {
     ui->plainTextEdit->selectAll();
+}
+
+
+void MainWindow::on_action_Font_triggered()
+{
+    bool ok;
+    QFont font =QFontDialog::getFont(&ok,ui->plainTextEdit->font(),this,"选择字体");
+    if(ok){
+        ui->plainTextEdit->setFont(font);
+    }
+}
+
+
+void MainWindow::on_action_Color_triggered()
+{
+    QColor color = QColorDialog::getColor();
+    if(color.isValid()){
+        ui->plainTextEdit->setStyleSheet(QString("QPlainTextEdit {color:%1;}").arg(color.name()));
+    }
+}
+
+
+void MainWindow::on_action_FontBackgroundColor_triggered()
+{
+    QColor color = QColorDialog::getColor();
+    QTextCursor cursor = ui->plainTextEdit->textCursor();
+    QTextCursor origin = cursor;
+    QTextCharFormat format;
+    format.setBackground(color);
+    cursor.movePosition(QTextCursor::Start);
+    cursor.movePosition(QTextCursor::End, QTextCursor::KeepAnchor);
+    cursor.setCharFormat(format);
+    ui->plainTextEdit->setTextCursor(origin);
+}
+
+
+void MainWindow::on_action_EditorBackgroundColor_triggered()
+{
+    QColor color = QColorDialog::getColor();
+    if(color.isValid()){
+        ui->plainTextEdit->setStyleSheet(QString("QPlainTextEdit {background-color:%1;}").arg(color.name()));
+    }
 }
 

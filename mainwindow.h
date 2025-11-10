@@ -57,6 +57,14 @@ private slots:
 
     void on_action_All_triggered();
 
+    void on_action_Font_triggered();
+
+    void on_action_Color_triggered();
+
+    void on_action_FontBackgroundColor_triggered();
+
+    void on_action_EditorBackgroundColor_triggered();
+
 private:
     Ui::MainWindow *ui;
     AboutDialog aboutDialog;
