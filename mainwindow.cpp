@@ -1,5 +1,5 @@
 #include "mainwindow.h"
-#include "./ui_mainwindow.h"
+#include "ui_mainwindow.h"
 #include <QInputDialog>
 #include <QFileDialog>
 #include <QColorDialog>
@@ -26,8 +26,15 @@ MainWindow::MainWindow(QWidget *parent)
     ui->action_Tool->setChecked(true);
     ui->action_Statu->setChecked(true);
     ui->action_W->setChecked(true);
-    ui->action_L->setChecked(false);
+    ui->action_L->setChecked(true);
 
+    info = new QLabel(" length:0  lines:1 ");
+    position = new QLabel(" Ln:1  Col:1 ");
+    user = new QLabel(" 陈圳鑫 ");
+
+    ui->statusbar->addPermanentWidget(info);
+    ui->statusbar->addPermanentWidget(position);
+    ui->statusbar->addPermanentWidget(user);
     ui->statusbar->show();
 
     this->setWindowTitle("文本编辑器");
@@ -273,5 +280,22 @@ void MainWindow::on_action_L_triggered()
 void MainWindow::on_action_W_triggered()
 {
     ui->plainTextEdit->setLineWrapMode(ui->action_W->isChecked()?QPlainTextEdit::WidgetWidth:QPlainTextEdit::NoWrap);
+}
+
+
+void MainWindow::on_plainTextEdit_textChanged()
+{
+    int length = ui->plainTextEdit->toPlainText().length();
+    int lines = ui->plainTextEdit->blockCount();
+    info->setText(QString(" length:%1  lines:%2 ").arg(length).arg(lines));
+}
+
+
+void MainWindow::on_plainTextEdit_cursorPositionChanged()
+{
+    QTextCursor cursor = ui->plainTextEdit->textCursor();
+    int Ln = cursor.blockNumber() + 1;
+    int Col = cursor.columnNumber() + 1;
+    position->setText(QString(" Ln:%1  Col:%2 ").arg(Ln).arg(Col));
 }
 

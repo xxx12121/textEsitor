@@ -15,6 +15,8 @@ public:
     void lineNumberAreaPaintEvent(QPaintEvent *event);
     int lineNumberAreaWidth();
 
+    void setHidden(bool hidden);
+
 protected:
     void resizeEvent(QResizeEvent *event) override;
 
@@ -25,6 +27,8 @@ private slots:
 
 private:
     QWidget *lineNumberArea;
+
+    bool hidden;
 };
 
 class LineNumberArea : public QWidget

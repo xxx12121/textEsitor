@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QCloseEvent>
+#include <QLabel>
 #include "aboutdialog.h"
 #include "finddialog.h"
 #include "replacedialog.h"
@@ -69,6 +70,10 @@ private slots:
 
     void on_action_W_triggered();
 
+    void on_plainTextEdit_textChanged();
+
+    void on_plainTextEdit_cursorPositionChanged();
+
 private:
     Ui::MainWindow *ui;
     AboutDialog aboutDialog;
@@ -77,6 +82,8 @@ private:
 
     QString filename;
     QString raw;
+
+    QLabel *info, *position, *user;
 
     void setEditable(bool f);
 

@@ -12,6 +12,8 @@ CodeEditor::CodeEditor(QWidget *parent) : QPlainTextEdit(parent)
 
     updateLineNumberAreaWidth(0);
     highlightCurrentLine();
+
+    hidden = false;
 }
 
 int CodeEditor::lineNumberAreaWidth()
@@ -93,3 +95,11 @@ void CodeEditor::lineNumberAreaPaintEvent(QPaintEvent *event)
         ++blockNumber;
     }
 }
+
+void CodeEditor::setHidden(bool hidden){
+    this->hidden = hidden;
+}
+
+
+
+
