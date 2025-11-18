@@ -74,6 +74,8 @@ private slots:
 
     void on_plainTextEdit_cursorPositionChanged();
 
+    void on_plainTextEdit_selectionChanged();
+
 private:
     Ui::MainWindow *ui;
     AboutDialog aboutDialog;

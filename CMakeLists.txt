@@ -9,41 +9,40 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# 统一查找 Qt Widgets 组件（兼容 Qt5/Qt6）
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
+# 统一管理所有源文件
 set(PROJECT_SOURCES
-        main.cpp
-        mainwindow.cpp
-        mainwindow.h
-        mainwindow.ui
+    main.cpp
+    mainwindow.cpp
+    mainwindow.h
+    mainwindow.ui
+    resources.qrc
+    aboutdialog.h
+    aboutdialog.cpp
+    aboutdialog.ui
+    finddialog.h
+    finddialog.cpp
+    finddialog.ui
+    replacedialog.h
+    replacedialog.cpp
+    replacedialog.ui
+    codeeditor.h
+    codeeditor.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    find_package(Qt6 REQUIRED COMPONENTS Core Widgets)
-
     qt_add_executable(textEditor
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-        resources.qrc
-
-        aboutdialog.h aboutdialog.cpp aboutdialog.ui
-        finddialog.h finddialog.cpp finddialog.ui
-        replacedialog.h replacedialog.cpp replacedialog.ui
-        codeeditor.h codeeditor.cpp
-
     )
-# Define target properties for Android with Qt 6 as:
-#    set_property(TARGET textEditor APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
-#                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
-# For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
 else()
     if(ANDROID)
         add_library(textEditor SHARED
             ${PROJECT_SOURCES}
         )
-# Define properties for Android with Qt 5 after find_package() calls as:
-#    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
     else()
         add_executable(textEditor
             ${PROJECT_SOURCES}
@@ -51,12 +50,13 @@ else()
     endif()
 endif()
 
+# 链接 Qt Widgets 库（兼容 Qt5/Qt6）
 target_link_libraries(textEditor PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
-target_link_libraries(textEditor PRIVATE Qt6::Core Qt6::Widgets)
 
-# Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
-# If you are developing for iOS or macOS you should consider setting an
-# explicit, fixed bundle identifier manually though.
+# 添加头文件搜索路径（关键：确保编译器能找到所有自定义头文件）
+target_include_directories(textEditor PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+
+# 平台相关配置（保持不变）
 if(${QT_VERSION} VERSION_LESS 6.1.0)
   set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.textEditor)
 endif()

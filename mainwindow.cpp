@@ -9,6 +9,9 @@
 #include <QFileInfo>
 #include <QTextStream>
 #include <QMessageBox>
+#include <QClipboard>
+#include <QApplication>
+#include <QMimeData>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -22,6 +25,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     setEditable(false);
+    ui->action_T->setEnabled(false);
+    ui->action_C->setEnabled(false);
+    ui->action_P->setEnabled(false);
 
     ui->action_Tool->setChecked(true);
     ui->action_Statu->setChecked(true);
@@ -62,9 +68,6 @@ void MainWindow::setEditable(bool f){
     ui->plainTextEdit->setEnabled(f);
     ui->action_S->setEnabled(f);
     ui->action_A->setEnabled(f);
-    ui->action_C->setEnabled(f);
-    ui->action_T->setEnabled(f);
-    ui->action_P->setEnabled(f);
     ui->action_U->setEnabled(f);
     ui->action_Z->setEnabled(f);
     ui->action_F->setEnabled(f);
@@ -297,5 +300,24 @@ void MainWindow::on_plainTextEdit_cursorPositionChanged()
     int Ln = cursor.blockNumber() + 1;
     int Col = cursor.columnNumber() + 1;
     position->setText(QString(" Ln:%1  Col:%2 ").arg(Ln).arg(Col));
+}
+
+
+void MainWindow::on_plainTextEdit_selectionChanged()
+{
+    if(ui->plainTextEdit->textCursor().hasSelection()){
+        ui->action_T->setEnabled(true);
+        ui->action_C->setEnabled(true);
+    }else{
+        ui->action_T->setEnabled(false);
+        ui->action_C->setEnabled(false);
+    }
+
+    if(QApplication::clipboard()->mimeData()->formats().isEmpty()){
+        ui->action_P->setEnabled(false);
+    }else{
+        ui->action_P->setEnabled(true);
+    }
+    qDebug()<<"1\n";
 }
 

@@ -397,6 +397,10 @@ QToolBar QToolButton::menu-indicator {
    </property>
   </action>
   <action name="action_Color">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/img/字体颜色_文字操作_jurassic.png</normaloff>:/img/字体颜色_文字操作_jurassic.png</iconset>
+   </property>
    <property name="text">
     <string>字体颜色</string>
    </property>
@@ -405,6 +409,10 @@ QToolBar QToolButton::menu-indicator {
    </property>
   </action>
   <action name="action_FontBackgroundColor">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/img/字体背景颜色.png</normaloff>:/img/字体背景颜色.png</iconset>
+   </property>
    <property name="text">
     <string>字体背景颜色</string>
    </property>
@@ -413,6 +421,10 @@ QToolBar QToolButton::menu-indicator {
    </property>
   </action>
   <action name="action_EditorBackgroundColor">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/img/背景颜色.png</normaloff>:/img/背景颜色.png</iconset>
+   </property>
    <property name="text">
     <string>编辑器背景色</string>
    </property>

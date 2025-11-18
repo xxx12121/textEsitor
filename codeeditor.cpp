@@ -116,7 +116,3 @@ void CodeEditor::setLineNumberHidden(bool hidden){
     updateLineNumberAreaWidth(0);
     update();
 }
-
-
-
-
