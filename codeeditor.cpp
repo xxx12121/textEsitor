@@ -18,6 +18,10 @@ CodeEditor::CodeEditor(QWidget *parent) : QPlainTextEdit(parent)
 
 int CodeEditor::lineNumberAreaWidth()
 {
+    if(hidden){
+        return 0;
+    }
+
     int digits = 1;
     int max = qMax(1, blockCount());
     while (max >= 10) {
@@ -37,6 +41,10 @@ void CodeEditor::updateLineNumberAreaWidth(int /* newBlockCount */)
 
 void CodeEditor::updateLineNumberArea(const QRect &rect, int dy)
 {
+    if (hidden) {
+        return;
+    }
+
     if (dy)
         lineNumberArea->scroll(0, dy);
     else
@@ -51,7 +59,13 @@ void CodeEditor::resizeEvent(QResizeEvent *e)
     QPlainTextEdit::resizeEvent(e);
 
     QRect cr = contentsRect();
-    lineNumberArea->setGeometry(QRect(cr.left(), cr.top(), lineNumberAreaWidth(), cr.height()));
+
+    if (hidden) {
+        lineNumberArea->setGeometry(QRect(0, 0, 0, 0));
+    } else{
+        lineNumberArea->setGeometry(QRect(cr.left(), cr.top(), lineNumberAreaWidth(), cr.height()));
+    }
+
 }
 
 void CodeEditor::highlightCurrentLine()
@@ -96,8 +110,11 @@ void CodeEditor::lineNumberAreaPaintEvent(QPaintEvent *event)
     }
 }
 
-void CodeEditor::setHidden(bool hidden){
+void CodeEditor::setLineNumberHidden(bool hidden){
     this->hidden = hidden;
+    lineNumberArea->setHidden(hidden);
+    updateLineNumberAreaWidth(0);
+    update();
 }
 
 

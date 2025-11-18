@@ -273,7 +273,7 @@ void MainWindow::on_action_EditorBackgroundColor_triggered()
 
 void MainWindow::on_action_L_triggered()
 {
-
+    ui->plainTextEdit->setLineNumberHidden(!ui->action_L->isChecked());
 }
 
 
